@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 
 import authRoute from './routes/auth.route.js';
+import bookRoute from './routes/book.route.js';
 
 app.use(cors());
 app.use(helmet());
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // API Routes
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/book', bookRoute);
 
 // Error handler
 app.use(errorhandler);

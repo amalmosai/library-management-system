@@ -1,5 +1,5 @@
 import Jwt from 'jsonwebtoken';
-import { createCustomError, HttpCode } from '../errors/customError.js';
+import { createCustomError, HttpCode } from '../utils/customError.js';
 
 export const authenticateUser = async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -22,7 +22,7 @@ export const authenticateUser = async (req, res, next) => {
 
     try {
         const decoded = Jwt.verify(token, process.env.JWT_SECRET);
-        req.body.user = decoded;
+        req.user = decoded;
         next();
     } catch (error) {
         return next(
@@ -36,7 +36,7 @@ export const authenticateUser = async (req, res, next) => {
 
 export const authorize = (...roles) => {
     return (req, res, next) => {
-        if (!req.body.user || !roles.includes(req.body.user.role)) {
+        if (!req.user || !roles.includes(req.user.role)) {
             return next(
                 createCustomError(
                     'Unauthorized to access this route',

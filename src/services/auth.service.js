@@ -48,7 +48,7 @@ class AuthService {
         }
 
         const token = await generateToken({
-            userId: user._id,
+            id: user._id,
             role: user.role,
         });
 

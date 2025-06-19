@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import mongoose from 'mongoose';
 
 export const userValidationSchema = Joi.object({
     name: Joi.string()
@@ -13,12 +14,10 @@ export const userValidationSchema = Joi.object({
     email: Joi.string()
         .email({ tlds: { allow: false } })
         .required()
-        .unique()
         .messages({
             'string.empty': 'Email is required',
             'string.email': 'Please enter a valid email address',
             'any.required': 'Email is required',
-            'string.unique': 'Email must be unique',
         }),
 
     password: Joi.string().min(6).max(20).required().messages({
@@ -43,5 +42,52 @@ export const validateUser = (req, res, next) => {
         abortEarly: false,
     });
     if (error) return next(error);
+    next();
+};
+
+const bookValidationSchema = Joi.object({
+    title: Joi.string()
+        .min(2)
+        .max(200)
+        .messages({
+            'string.min': 'Title should be at least {#limit} characters',
+            'string.max': 'Title cannot exceed {#limit} characters',
+        })
+        .trim(),
+
+    author: Joi.string()
+        .min(2)
+        .max(100)
+        .messages({
+            'string.min': 'Author name should be at least {#limit} characters',
+            'string.max': 'Author name cannot exceed {#limit} characters',
+        })
+        .trim(),
+
+    isbn: Joi.string().trim(),
+
+    category: Joi.string()
+        .valid('fiction', 'non-fiction', 'science', 'history', 'other')
+        .default('other')
+        .messages({
+            'any.only':
+                'Category must be one of: fiction, non-fiction, science, history, other',
+        }),
+
+    quantity: Joi.number().integer().min(0).default(1).messages({
+        'number.base': 'Quantity must be a number',
+        'number.integer': 'Quantity must be an integer',
+        'number.min': 'Quantity cannot be negative',
+    }),
+});
+
+// Validation middleware
+export const validateBook = (req, res, next) => {
+    const { error } = bookValidationSchema.validate(req.body, {
+        abortEarly: false,
+    });
+
+    if (error) return next(error);
+
     next();
 };
