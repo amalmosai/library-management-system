@@ -11,6 +11,7 @@ const app = express();
 
 import authRoute from './routes/auth.route.js';
 import bookRoute from './routes/book.route.js';
+import messageRoute from './routes/message.route.js';
 
 app.use(cors());
 app.use(helmet());
@@ -20,9 +21,11 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
+
 // API Routes
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/book', bookRoute);
+app.use('/api/v1/messages', messageRoute);
 
 // Error handler
 app.use(errorhandler);
