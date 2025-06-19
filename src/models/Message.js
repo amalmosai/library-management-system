@@ -12,10 +12,13 @@ const MessageSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User',
             index: true,
+            default: null,
         },
         groupId: {
             type: String,
+            enum: ['main_group'],
             index: true,
+            default: null,
         },
         type: {
             type: String,

@@ -4,12 +4,18 @@ import { createCustomError, HttpCode } from '../utils/customError.js';
 import { getIO } from '../app.js';
 class MessageService {
     async sendMessage(messageData) {
-        const user = await User.findOne({ _id: messageData.receiverId });
-        if (!user && messageData.type === 'private') {
-            throw createCustomError('receiver not found', HttpCode.NOT_FOUND);
+        if (messageData.type === 'private') {
+            const user = await User.findById(messageData.receiverId);
+            if (!user) {
+                throw createCustomError(
+                    'Receiver not found',
+                    HttpCode.NOT_FOUND
+                );
+            }
         }
         const message = await Message.create(messageData);
-        const receiverId = message.receiverId.toString();
+
+        const receiverId = message.receiverId?.toString();
         const io = getIO();
 
         if (message.type === 'group') {

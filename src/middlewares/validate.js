@@ -137,7 +137,7 @@ export const messageValidationSchema = Joi.object({
                     .default('main_group')
                     .required()
                     .messages({
-                        'any.only': 'Group ID must be "main_group"',
+                        'any.only': 'Group ID must be main_group',
                         'any.required':
                             'Group ID is required for group messages',
                     }),
