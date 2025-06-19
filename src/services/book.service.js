@@ -1,5 +1,6 @@
 import Book from '../models/Book.js';
 import { createCustomError, HttpCode } from '../utils/customError.js';
+import { getIO } from '../app.js';
 class BookService {
     async createBook(bookData) {
         const existingBook = await Book.findOne({ isbn: bookData.isbn });
@@ -7,7 +8,16 @@ class BookService {
             throw createCustomError('ISBN already exists', HttpCode.CONFLICT);
         }
 
-        return await Book.create(bookData);
+        const book = await Book.create(bookData);
+
+        const io = getIO();
+        io.emit('new_book', {
+            message: `New book '${book.title}' added by ${book.userId}`,
+            bookId: book._id,
+            createdAt: new Date(),
+        });
+
+        return book;
     }
 
     async getAllBooks({ category, search }) {

@@ -1,15 +1,34 @@
 import Message from '../models/Message.js';
 import User from '../models/User.js';
 import { createCustomError, HttpCode } from '../utils/customError.js';
-
+import { getIO } from '../app.js';
 class MessageService {
     async sendMessage(messageData) {
         const user = await User.findOne({ _id: messageData.receiverId });
         if (!user && messageData.type === 'private') {
             throw createCustomError('receiver not found', HttpCode.NOT_FOUND);
         }
+        const message = await Message.create(messageData);
+        const receiverId = message.receiverId.toString();
+        const io = getIO();
 
-        return await Message.create(messageData);
+        if (message.type === 'group') {
+            io.to('main_group').emit('new_message', {
+                senderId: message.senderId,
+                text: message.text,
+                type: 'group',
+                createdAt: new Date(),
+            });
+        } else {
+            io.to(receiverId).emit('new_message', {
+                senderId: message.senderId,
+                text: message.text,
+                type: 'private',
+                createdAt: new Date(),
+            });
+        }
+
+        return message;
     }
 
     async getPrivateMessages(currentUserId, otherUserId) {
