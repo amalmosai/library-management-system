@@ -13,6 +13,11 @@ const app = express();
 
 const httpServer = createServer(app);
 
+/**
+ *
+ * Initialize Socket.IO server
+ *
+ * */
 const io = new Server(httpServer, {
     cors: {
         origin: '*',
@@ -20,6 +25,11 @@ const io = new Server(httpServer, {
     },
 });
 
+/**
+ *
+ * Handle new socket connections
+ *
+ * */
 io.on('connection', (socket) => {
     const userId = socket.handshake.query.userId;
 
@@ -35,9 +45,14 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log(`User ${userId} disconnected`);
-        // Clean up if needed
     });
 });
+
+/**
+ *
+ *Get active Socket.IO instance (used in other modules to emit events)
+ *
+ * */
 
 export const getIO = () => {
     if (!io) {
@@ -85,7 +100,11 @@ app.use('/api/v1/messages', messageRoute);
  * */
 app.use(errorhandler);
 
+/**
+ * database connection
+ **/
 connectDB();
+
 /**
  * Start the server
  **/
