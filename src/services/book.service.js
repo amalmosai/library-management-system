@@ -1,7 +1,5 @@
-import Book from '../models/book.js';
+import Book from '../models/Book.js';
 import { createCustomError, HttpCode } from '../utils/customError.js';
-import User from '../models/User.js';
-
 class BookService {
     async createBook(bookData) {
         const existingBook = await Book.findOne({ isbn: bookData.isbn });

@@ -1,7 +1,7 @@
 import express from 'express';
 import BookController from '../controllers/book.controller.js';
 import { authenticateUser, authorize } from '../middlewares/auth.js';
-import { validateBook } from '../middlewares/validate.js';
+import { validateBook, validateBookIdParam } from '../middlewares/validate.js';
 
 const router = express.Router();
 
@@ -27,6 +27,7 @@ router
     .get(
         authenticateUser,
         authorize('admin', 'librarian'),
+        validateBookIdParam,
         BookController.getBook
     );
 
@@ -35,11 +36,17 @@ router
     .put(
         authenticateUser,
         authorize('admin', 'librarian'),
+        validateBookIdParam,
         BookController.updateBook
     );
 
 router
     .route('/:id')
-    .delete(authenticateUser, authorize('admin'), BookController.deleteBook);
+    .delete(
+        authenticateUser,
+        authorize('admin'),
+        validateBookIdParam,
+        BookController.deleteBook
+    );
 
 export default router;

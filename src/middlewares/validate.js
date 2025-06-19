@@ -183,3 +183,24 @@ export const validateUserIdParam = (req, res, next) => {
     if (error) return next(error);
     next();
 };
+
+export const bookIdParamSchema = Joi.object({
+    id: Joi.string()
+        .custom((value, helpers) => {
+            if (!mongoose.isValidObjectId(value)) {
+                return helpers.error('any.invalid');
+            }
+            return value;
+        })
+        .required()
+        .messages({
+            'any.invalid': 'Invalid book ID format',
+            'any.required': 'Book ID is required',
+        }),
+});
+
+export const validateBookIdParam = async (req, res, next) => {
+    const { error } = bookIdParamSchema.validate({ id: req.params.id });
+    if (error) return next(error);
+    next();
+};
