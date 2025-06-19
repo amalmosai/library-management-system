@@ -19,10 +19,10 @@ Follow these steps to set up the project on your local machine.
 3. Configure Environment Variables:
    Create a .env file based on the .env.example file and set the following:
 
-    MONGODB_URI=<your-mongodb-uri> # MongoDB connection string (local or Atlas)
-    JWT_SECRET=<your-jwt-secret> # Secret key for JWT
-    PORT=3000 # Optional: default is 3000
-    NODE_ENV=development # or "production" for live environment
+    - MONGODB_URI=<your-mongodb-uri> # MongoDB connection string (local or Atlas)
+    - JWT_SECRET=<your-jwt-secret> # Secret key for JWT
+    - PORT=3000 # Optional: default is 3000
+    - NODE_ENV=development # or "production" for live environment
 
 4. Set Up MongoDB:
    Ensure MongoDB is running either locally or through MongoDB Atlas.
