@@ -1,4 +1,4 @@
-import { CustomError, HttpCode } from '../errors/customError.js';
+import { CustomError, HttpCode } from '../utils/customError.js';
 import { Error } from 'mongoose';
 
 const errorHandler = (err, req, res, next) => {
@@ -27,12 +27,12 @@ const errorHandler = (err, req, res, next) => {
         customError.statusCode = HttpCode.BAD_REQUEST;
     }
 
-    if (req.url.startsWith('/api/v1/') && !req.route) {
+    if (req?.url.startsWith('/api/v1/') && !req.route) {
         customError.statusCode = HttpCode.NOT_FOUND;
         customError.message = 'Not Found';
     }
 
-    return res.status(customError.statusCode).json({
+    return res?.status(customError.statusCode).json({
         message: customError.message,
         statusCode: customError.statusCode,
     });
