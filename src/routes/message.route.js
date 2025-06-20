@@ -19,12 +19,17 @@ router
     .route('/private/:userId')
     .get(
         authenticateUser,
+        authorize('admin', 'librarian'),
         validateUserIdParam,
         MessageController.getPrivateMessages
     );
 
 router
     .route('/group')
-    .get(authenticateUser, MessageController.getGroupMessages);
+    .get(
+        authenticateUser,
+        authorize('admin', 'librarian'),
+        MessageController.getGroupMessages
+    );
 
 export default router;

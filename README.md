@@ -113,7 +113,58 @@ Content-Type: application/json
   "isbn": "9780432735946",
   "category": "fiction",
   "quantity": 5 ,
-  "userId": "<userId>" // This is  is automatically populated from the authenticated user's JWT token req.user.id
+  "userId": "<userId>"
 }
 
 ```
+
+#### Note
+
+- The userId is automatically populated from the authenticated user's JWT token req.user.id
+
+## Message Routes
+
+| Method | Endpoint                             | Auth Required | Roles            | Description                    |
+| ------ | ------------------------------------ | ------------- | ---------------- | ------------------------------ |
+| POST   | /api/v1/messages                     | Yes           | admin, librarian | Send a message (group/private) |
+| GET    | /api/v1/messages/private/:receiverId | Yes           | admin, librarian | Get private messages           |
+| GET    | /api/v1/messages/group               | Yes           | admin, librarian | Get group messages             |
+
+#### Example Send Message
+
+### Request
+
+```http
+
+POST /api/v1/messages
+Authorization: Bearer <your_token>
+Content-Type: application/json
+
+```
+
+1. Group Message
+
+```
+{
+  "type": "group",
+  "text": "Hello team!",
+  "groupId": "main_group",
+  "senderId": <senderId>
+}
+```
+
+2. Private Message
+
+```
+{
+   "receiverId":<receiverId>
+  "type": "private",
+  "text": "Hello!",
+  "senderId": <senderId>
+}
+
+```
+
+#### Note
+
+- The senderId is automatically populated from the authenticated user's JWT token req.user.id
