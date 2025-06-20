@@ -53,6 +53,8 @@ Follow these steps to set up the project on your local machine.
 - Check your server logs for connection events
 - The browser console will display connection status and received messages
 
+5. create new book or send message
+
 ## API Endpoints
 
 ### Auth Routes
