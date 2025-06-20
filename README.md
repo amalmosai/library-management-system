@@ -124,11 +124,11 @@ Content-Type: application/json
 
 ### Message Routes
 
-| Method | Endpoint                         | Auth Required | Roles            | Description                    |
-| ------ | -------------------------------- | ------------- | ---------------- | ------------------------------ |
-| POST   | /api/v1/messages                 | Yes           | admin, librarian | Send a message (group/private) |
-| GET    | /api/v1/messages/private/:userId | Yes           | admin, librarian | Get private messages           |
-| GET    | /api/v1/messages/group           | Yes           | admin, librarian | Get group messages             |
+| Method | Endpoint                           | Auth Required | Roles            | Description                    |
+| ------ | ---------------------------------- | ------------- | ---------------- | ------------------------------ |
+| POST   | `/api/v1/messages`                 | Yes           | admin, librarian | Send a message (group/private) |
+| GET    | `/api/v1/messages/private/:userId` | Yes           | admin, librarian | Get private messages           |
+| GET    | `/api/v1/messages/group`           | Yes           | admin, librarian | Get group messages             |
 
 #### Example Send Message
 
