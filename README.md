@@ -36,8 +36,31 @@ Follow these steps to set up the project on your local machine.
 7. Run tests
    `npm run test`
 
+## Testing Socket.io
+
+1. Ensure your backend server with Socket.io is running locally on port 3000
+
+2. Open `src/tests/socket/test-client.html` in your browser.
+
+3. Simulate a User Connection
+
+simulates a user with the ID:
+
+```js
+'userId': '68544b21a385f53443c57c98' //Example user Id
+```
+
+4. Verify Connection
+
+- Check your server logs for connection events
+- The browser console will display connection status and received messages
+
 ## API Endpoints
 
 - `/api/v1/auth`: Authentication routes
 - `/api/v1/book`: Book management routes
 - `/api/v1/message`: Message routes
+
+```
+
+```
