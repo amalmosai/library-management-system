@@ -53,8 +53,6 @@ Follow these steps to set up the project on your local machine.
 - Check your server logs for connection events
 - The browser console will display connection status and received messages
 
-from pathlib import Path
-
 ## API Endpoints
 
 ### Auth Routes
