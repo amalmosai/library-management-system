@@ -34,7 +34,7 @@ Follow these steps to set up the project on your local machine.
    `npm start`
 
 7. Run tests
-   `npm run test`
+   `npm test`
 
 ## Testing Socket.io
 
@@ -53,12 +53,39 @@ Follow these steps to set up the project on your local machine.
 - Check your server logs for connection events
 - The browser console will display connection status and received messages
 
+from pathlib import Path
+
 ## API Endpoints
 
-- `/api/v1/auth`: Authentication routes
-- `/api/v1/book`: Book management routes
-- `/api/v1/message`: Message routes
+### Auth Routes
 
+| Method | Endpoint                | Description         |
+| ------ | ----------------------- | ------------------- |
+| POST   | `/api/v1/auth/register` | Register a new user |
+| POST   | `/api/v1/auth/login`    | Login and get token |
+
+#### Register Example
+
+```http
+POST /api/v1/auth/register
+Content-Type: application/json
+
+{
+  "name": "Admin User",
+  "email": "admin@library.com",
+  "password": "Admin@123",
+  "role": "admin"
+}
 ```
 
+#### Login Example
+
+```http
+POST /api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@library.com",
+  "password": "Admin@123",
+}
 ```
