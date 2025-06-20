@@ -42,9 +42,7 @@ Follow these steps to set up the project on your local machine.
 
 2. Open `src/tests/socket/test-client.html` in your browser.
 
-3. Simulate a User Connection
-
-simulates a user with the ID:
+3. Simulate a User Connection with ID:
 
 ```js
 'userId': '68544b21a385f53443c57c98' //Example user Id
