@@ -1,10 +1,8 @@
 import express from 'express';
 import MessageController from '../controllers/message.controller.js';
 import { authenticateUser, authorize } from '../middlewares/auth.js';
-import {
-    validateMessage,
-    validateUserIdParam,
-} from '../middlewares/validate.js';
+import { validateMessage } from '../middlewares/message.validation.js';
+import { validateUserIdParam } from '../middlewares/user.validation.js';
 
 const router = express.Router();
 

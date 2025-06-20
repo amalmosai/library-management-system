@@ -2,7 +2,6 @@ import User from '../models/User.js';
 import { generateToken } from '../utils/jwt.js';
 import { hashPassword, comparePasswords } from '../utils/password.js';
 import { createCustomError, HttpCode } from '../utils/customError.js';
-import { userValidationSchema } from '../middlewares/validate.js';
 
 class AuthService {
     async registerUser(userData) {

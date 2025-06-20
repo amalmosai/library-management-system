@@ -1,7 +1,10 @@
 import express from 'express';
 import BookController from '../controllers/book.controller.js';
 import { authenticateUser, authorize } from '../middlewares/auth.js';
-import { validateBook, validateBookIdParam } from '../middlewares/validate.js';
+import {
+    validateBook,
+    validateBookIdParam,
+} from '../middlewares/book.validation.js';
 
 const router = express.Router();
 
