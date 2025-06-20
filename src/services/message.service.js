@@ -38,8 +38,6 @@ class MessageService {
     }
 
     async getPrivateMessages(currentUserId, otherUserId) {
-        console.log(currentUserId, otherUserId);
-
         const user = await User.findOne({ _id: otherUserId });
         if (!user) {
             throw createCustomError('User not found', HttpCode.NOT_FOUND);
