@@ -89,3 +89,31 @@ Content-Type: application/json
   "password": "Admin@123",
 }
 ```
+
+### Book Routes
+
+| Method | Endpoint           | Auth Required | Roles            | Description             |
+| ------ | ------------------ | ------------- | ---------------- | ----------------------- |
+| POST   | `/api/v1/book`     | Yes           | admin, librarian | Create a new book       |
+| GET    | `/api/v1/book`     | Yes           | admin, librarian | Get all books           |
+| GET    | `/api/v1/book/:id` | Yes           | admin, librarian | Get a single book by ID |
+| PUT    | `/api/v1/book/:id` | Yes           | admin, librarian | Update book by ID       |
+| DELETE | `/api/v1/book/:id` | Yes           | admin only       | Delete book by ID       |
+
+#### Create Book Example
+
+```http
+POST /api/v1/book
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "isbn": "9780432735946",
+  "category": "fiction",
+  "quantity": 5 ,
+  "userId": "<userId>" // This is  is automatically populated from the authenticated user's JWT token req.user.id
+}
+
+```
