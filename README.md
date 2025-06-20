@@ -122,17 +122,17 @@ Content-Type: application/json
 
 - The userId is automatically populated from the authenticated user's JWT token req.user.id
 
-## Message Routes
+### Message Routes
 
-| Method | Endpoint                             | Auth Required | Roles            | Description                    |
-| ------ | ------------------------------------ | ------------- | ---------------- | ------------------------------ |
-| POST   | /api/v1/messages                     | Yes           | admin, librarian | Send a message (group/private) |
-| GET    | /api/v1/messages/private/:receiverId | Yes           | admin, librarian | Get private messages           |
-| GET    | /api/v1/messages/group               | Yes           | admin, librarian | Get group messages             |
+| Method | Endpoint                         | Auth Required | Roles            | Description                    |
+| ------ | -------------------------------- | ------------- | ---------------- | ------------------------------ |
+| POST   | /api/v1/messages                 | Yes           | admin, librarian | Send a message (group/private) |
+| GET    | /api/v1/messages/private/:userId | Yes           | admin, librarian | Get private messages           |
+| GET    | /api/v1/messages/group           | Yes           | admin, librarian | Get group messages             |
 
 #### Example Send Message
 
-### Request
+#### Request
 
 ```http
 
