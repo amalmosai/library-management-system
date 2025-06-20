@@ -21,7 +21,7 @@ Follow these steps to set up the project on your local machine.
 
     - MONGODB_URI=<your-mongodb-uri> # MongoDB connection string (local or Atlas)
     - JWT_SECRET=<your-jwt-secret> # Secret key for JWT
-    - PORT=3000 # Optional: default is 3000
+    - PORT=3000
     - NODE_ENV=development # or "production" for live environment
 
 4. Set Up MongoDB:
