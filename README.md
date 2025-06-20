@@ -33,6 +33,9 @@ Follow these steps to set up the project on your local machine.
 6. Start the Server:
    `npm start`
 
+7. Run tests
+   `npm run test`
+
 ## API Endpoints
 
 - `/api/v1/auth`: Authentication routes
